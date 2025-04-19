@@ -54,7 +54,7 @@
   </default>
   <worldbody>
     <!-- Link trunk_assembly -->
-    <body name="trunk_assembly" pos="0 0 0" quat="1 0 0 0" childclass="bdx_v2">
+    <body name="trunk_assembly" pos="0 0 0.35" quat="1 0 0 0" childclass="bdx_v2">
       <freejoint name="trunk_assembly_freejoint"/>
       <inertial pos="0.00707759 0.000136617 0.0326219" mass="2.73391" fullinertia="0.00826751 0.0169634 0.0160137 7.20875e-06 0.000237105 -1.27506e-06"/>
       <!-- Frame imu -->
