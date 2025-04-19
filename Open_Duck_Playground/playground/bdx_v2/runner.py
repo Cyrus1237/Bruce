@@ -4,7 +4,7 @@ import argparse
 
 from playground.common import randomize
 from playground.common.runner import BaseRunner
-from playground.open_duck_mini_v2 import joystick, standing
+from playground.bdx_v2 import joystick, standing
 
 
 class OpenDuckMiniV2Runner(BaseRunner):
