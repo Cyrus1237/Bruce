@@ -1,2 +1,4 @@
 .venv/
+.tmp/
 Open_Duck_Playground.egg-info/
+Open_Duck_Playground/playground/common/__pycache__/
