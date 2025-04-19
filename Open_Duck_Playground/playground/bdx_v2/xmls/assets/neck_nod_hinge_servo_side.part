@@ -1,0 +1,13 @@
+{
+    "configuration": "default",
+    "documentId": "6ef1edce1e53abf975b22e4e",
+    "documentMicroversion": "7651140e00cbc64ffd20a141",
+    "elementId": "8db3d97255c124c2ff463b63",
+    "fullConfiguration": "default",
+    "id": "MTFf6TqDwbBC3xvQJ",
+    "isStandardContent": false,
+    "name": "Neck nod hinge servo side <1>",
+    "partId": "JND",
+    "suppressed": false,
+    "type": "Part"
+}

@@ -1,0 +1,38 @@
+{
+    // You should store those three in environment variables
+    // <site group="0" name="imu" pos="-0.055 0 0.08"/>      
+    "onshape_api": "https://cad.onshape.com",
+    "onshape_access_key": "cS6X3UE1oQgQBpC6HhQDTcHd",
+    "onshape_secret_key": "za5ML3QTvjA28HhHwOU30qpO43yHhXA9HDNIRnDlnN7dqMdi",
+
+    // Can be found in the URL when editing the assembly
+    "url": "https://cad.onshape.com/documents/6ef1edce1e53abf975b22e4e/w/36a342626c723895f8576bca/e/3f7555bc3cf0e9c73ccb9af7",
+    // If not specified, the first assembly will be used
+    "assemblyName": "SDP-BD-X Fixed Antenna",
+    // "assemblyName": "SDP-BD-X",
+
+    // Can be urdf or sdf
+    "outputFormat": "mujoco",
+    //"outputFormat": "urdf",    
+    "robot_name": "bdx_v2",
+    "output_filename": "bdx_v2",
+    "simplify_stls": true,    
+    "max_stl_size": 0.005,
+    "ignore": {
+        // "wj*": "visual",
+        "*Foot Button Connector": "visual",
+        "*": "collision",
+        "!Foot Pad": "collision"
+    },    
+    "joint_properties": {
+        "default": {
+            "class": "sts3215"
+        }
+    },
+    "additional_xml": [
+        "sensors.xml",
+        "joints_properties.xml"
+    ]        
+
+    // modify knee joints to be lower="-1.5708" upper="1.5708"  ??
+}

@@ -1,0 +1,477 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape https://cad.onshape.com/documents/6ef1edce1e53abf975b22e4e/w/36a342626c723895f8576bca/e/3f7555bc3cf0e9c73ccb9af7 -->
+<mujoco model="bdx_v2">
+
+  <option iterations="1" ls_iterations="5">
+    <flag eulerdamp="disable"/>
+  </option>
+  <compiler angle="radian" meshdir="assets"/>
+
+  <!-- <option noslip_iterations="1"/>
+  <compiler angle="radian" meshdir="assets" autolimits="true"/> -->
+  <default>
+    <default class="bdx_v2">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <!-- Additional sensors.xml -->
+  <sensor>
+    <gyro site="imu" name="gyro"/>
+    <velocimeter site="imu" name="local_linvel"/>
+    <accelerometer site="imu" name="accelerometer"/>
+    <framezaxis objtype="site" objname="imu" name="upvector"/>
+    <framexaxis objtype="site" objname="imu" name="forwardvector"/>
+    <framelinvel objtype="site" objname="imu" name="global_linvel"/>
+    <frameangvel objtype="site" objname="imu" name="global_angvel"/>
+    <framepos objtype="site" objname="imu" name="position"/>
+    <framequat objtype="site" objname="imu" name="orientation"/>
+    <framelinvel objtype="site" objname="right_foot" name="right_foot_global_linvel"/>
+    <framelinvel objtype="site" objname="left_foot" name="left_foot_global_linvel"/>
+    <framexaxis objtype="site" objname="left_foot" name="left_foot_upvector"/>
+    <framexaxis objtype="site" objname="right_foot" name="right_foot_upvector"/>
+    <framepos objtype="site" objname="left_foot" name="left_foot_pos"/>
+    <framepos objtype="site" objname="right_foot" name="right_foot_pos"/>
+  </sensor>
+  <!-- Additional joints_properties.xml -->
+  <default>
+    <default class="sts3215">
+      <geom contype="0" conaffinity="0"/>
+      <joint damping="0.60" frictionloss="0.052" armature="0.028"/>
+      <position kp="100" kv="0.0" forcerange="-100 100"/>
+    </default>
+    <default class="backlash">
+      <!-- +/- 0.5° of backlash -->
+      <joint damping="0.01" frictionloss="0" armature="0.01" limited="true" range="-0.008726646259971648 0.008726646259971648"/>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link trunk_assembly -->
+    <body name="trunk_assembly" pos="0 0 0" quat="1 0 0 0" childclass="bdx_v2">
+      <freejoint name="trunk_assembly_freejoint"/>
+      <inertial pos="0.00707759 0.000136617 0.0326219" mass="2.73391" fullinertia="0.00826751 0.0169634 0.0160137 7.20875e-06 0.000237105 -1.27506e-06"/>
+      <!-- Frame imu -->
+      <site group="0" name="imu" pos="-0.055 0 0.08"/>                
+      <!-- Part zeee_lipo -->
+      <geom type="mesh" class="visual" pos="-0.0820727 0.0004 0.03675" quat="0.707107 -5.55112e-17 -3.33067e-16 0.707107" mesh="zeee_lipo" material="zeee_lipo_material"/>
+      <!-- Part torso_frame_v2 -->
+      <geom type="mesh" class="visual" pos="-0.00897275 -2.32199e-17 -0.02" quat="0.707107 0 1.11022e-16 0.707107" mesh="torso_frame_v2" material="torso_frame_v2_material"/>
+      <!-- Part back_right_frame -->
+      <geom type="mesh" class="visual" pos="-0.00897275 -2.77631e-17 1.77033e-17" quat="0.707107 0 0 0.707107" mesh="back_right_frame" material="back_right_frame_material"/>
+      <!-- Part back_left_frame -->
+      <geom type="mesh" class="visual" pos="-0.00897275 -2.77631e-17 1.77033e-17" quat="0.707107 0 1.11022e-16 0.707107" mesh="back_left_frame" material="back_left_frame_material"/>
+      <!-- Part battery_rack -->
+      <geom type="mesh" class="visual" pos="-0.0521557 -1.7578e-17 0.03725" quat="0.707107 0 0 0.707107" mesh="battery_rack" material="battery_rack_material"/>
+      <!-- Part back_top_frame -->
+      <geom type="mesh" class="visual" pos="-0.00897275 -3.42054e-17 1.77033e-17" quat="0.707107 -0 -2.22045e-16 0.707107" mesh="back_top_frame" material="back_top_frame_material"/>
+      <!-- Part right_frame -->
+      <geom type="mesh" class="visual" pos="-0.00897275 -2.77631e-17 3.15811e-17" quat="0.707107 0 -2.22045e-16 0.707107" mesh="right_frame" material="right_frame_material"/>
+      <!-- Part inner_front_frame -->
+      <geom type="mesh" class="visual" pos="-0.00897275 -2.7861e-17 1.77033e-17" quat="0.707107 0 -2.22045e-16 0.707107" mesh="inner_front_frame" material="inner_front_frame_material"/>
+      <!-- Part front_frame -->
+      <geom type="mesh" class="visual" pos="-0.00897275 -2.77631e-17 1.77033e-17" quat="0.707107 0 1.11022e-16 0.707107" mesh="front_frame" material="front_frame_material"/>
+      <!-- Part servo_side -->
+      <geom type="mesh" class="visual" pos="0.0610552 0.035 0.02" quat="0.5 0.5 0.5 0.5" mesh="servo_side" material="servo_side_material"/>
+      <!-- Part circular_servo_prong -->
+      <geom type="mesh" class="visual" pos="0.0810552 0.021 0.1" quat="0.707107 0.707107 4.44089e-16 7.04915e-15" mesh="circular_servo_prong" material="circular_servo_prong_material"/>
+      <!-- Part bearing_side_spacer -->
+      <geom type="mesh" class="visual" pos="0.0810552 -0.018 0.1" quat="3.30055e-15 3.30055e-15 0.707107 -0.707107" mesh="bearing_side_spacer" material="bearing_side_spacer_material"/>
+      <!-- Part bearing_side -->
+      <geom type="mesh" class="visual" pos="0.0610552 -0.035 0.02" quat="0.5 0.5 0.5 0.5" mesh="bearing_side" material="bearing_side_material"/>
+      <!-- Part inner_back_frame -->
+      <geom type="mesh" class="visual" pos="-0.0121557 -1.11131e-17 1.21431e-17" quat="0.707107 -0 1.11022e-16 0.707107" mesh="inner_back_frame" material="inner_back_frame_material"/>
+      <!-- Part front_top_frame -->
+      <geom type="mesh" class="visual" pos="-0.00897275 -3.0736e-17 1.77033e-17" quat="0.707107 0 -2.22045e-16 0.707107" mesh="front_top_frame" material="front_top_frame_material"/>
+      <!-- Part left_frame -->
+      <geom type="mesh" class="visual" pos="-0.00897275 -2.77631e-17 4.69285e-18" quat="0.707107 0 8.32667e-17 0.707107" mesh="left_frame" material="left_frame_material"/>
+      <!-- Part wj_wk00_0124bottomcase_45 -->
+      <geom type="mesh" class="visual" pos="-0.00897275 0.0241 -0.0079" quat="0.5 -0.5 0.5 -0.5" mesh="wj_wk00_0124bottomcase_45" material="wj_wk00_0124bottomcase_45_material"/>
+      <!-- Part wj_wk00_0122topcabinetcase_95 -->
+      <geom type="mesh" class="visual" pos="-0.00897275 0.0241 -0.0079" quat="0.5 -0.5 0.5 -0.5" mesh="wj_wk00_0122topcabinetcase_95" material="wj_wk00_0122topcabinetcase_95_material"/>
+      <!-- Part wj_wk00_0123middlecase_56 -->
+      <geom type="mesh" class="visual" pos="-0.00897275 0.0241 -0.0079" quat="0.5 -0.5 0.5 -0.5" mesh="wj_wk00_0123middlecase_56" material="wj_wk00_0123middlecase_56_material"/>
+      <!-- Part wj_wk00_0124bottomcase_45_2 -->
+      <geom type="mesh" class="visual" pos="-0.00897275 -0.0241 -0.0079" quat="0.5 -0.5 -0.5 0.5" mesh="wj_wk00_0124bottomcase_45" material="wj_wk00_0124bottomcase_45_material"/>
+      <!-- Part wj_wk00_0122topcabinetcase_95_2 -->
+      <geom type="mesh" class="visual" pos="-0.00897275 -0.0241 -0.0079" quat="0.5 -0.5 -0.5 0.5" mesh="wj_wk00_0122topcabinetcase_95" material="wj_wk00_0122topcabinetcase_95_material"/>
+      <!-- Part wj_wk00_0123middlecase_56_2 -->
+      <geom type="mesh" class="visual" pos="-0.00897275 -0.0241 -0.0079" quat="0.5 -0.5 -0.5 0.5" mesh="wj_wk00_0123middlecase_56" material="wj_wk00_0123middlecase_56_material"/>
+      <!-- Frame trunk -->
+      <site group="3" name="trunk" pos="0.0503443 -1.76728e-17 0.079" quat="1 0 -7.97973e-17 2.1859e-17"/>
+      <!-- Link left_hip_rotator_cuff_assem -->
+      <body name="left_hip_rotator_cuff_assem" pos="-0.00897275 0.0496 -0.0162" quat="0.707107 2.87086e-15 -1.11022e-16 -0.707107">
+        <!-- Joint from trunk_assembly to left_hip_rotator_cuff_assem -->
+        <joint axis="0 0 1" name="left_hip_yaw" type="hinge" range="-0.4363323129985664 1.1344640137963302" class="sts3215"/>
+        <inertial pos="-0.000178906 -0.000213538 -0.0216312" mass="0.118126" fullinertia="3.14061e-05 6.11352e-05 5.72854e-05 -3.3789e-07 -1.39865e-07 -1.32975e-07"/>
+        <!-- Part circular_servo_prong_2 -->
+        <geom type="mesh" class="visual" pos="1.38778e-17 -5.20417e-18 -0.002" quat="0.707107 1.8927e-15 -4.71845e-15 -0.707107" mesh="circular_servo_prong" material="circular_servo_prong_material"/>
+        <!-- Part right_hip_rotator_cuff -->
+        <geom type="mesh" class="visual" pos="-0.064 0.0185 -0.027" quat="0.707107 -3.35657e-15 -0.707107 1.43586e-17" mesh="right_hip_rotator_cuff" material="right_hip_rotator_cuff_material"/>
+        <!-- Part wj_wk00_0124bottomcase_45_3 -->
+        <geom type="mesh" class="visual" pos="0.01265 0.0088 -0.027" quat="1 -2.17757e-15 -5.44009e-15 -2.22998e-15" mesh="wj_wk00_0124bottomcase_45" material="wj_wk00_0124bottomcase_45_material"/>
+        <!-- Part wj_wk00_0122topcabinetcase_95_3 -->
+        <geom type="mesh" class="visual" pos="0.01265 0.0088 -0.027" quat="1 -2.17757e-15 -5.44009e-15 -2.22998e-15" mesh="wj_wk00_0122topcabinetcase_95" material="wj_wk00_0122topcabinetcase_95_material"/>
+        <!-- Part wj_wk00_0123middlecase_56_3 -->
+        <geom type="mesh" class="visual" pos="0.01265 0.0088 -0.027" quat="1 -2.17757e-15 -5.44009e-15 -2.22998e-15" mesh="wj_wk00_0123middlecase_56" material="wj_wk00_0123middlecase_56_material"/>
+        <!-- Link left_lateral_hip_bone_assem -->
+        <body name="left_lateral_hip_bone_assem" pos="-0.01285 0.0171 -0.027" quat="0.5 0.5 0.5 -0.5">
+          <!-- Joint from left_hip_rotator_cuff_assem to left_lateral_hip_bone_assem -->
+          <joint axis="0 0 1" name="left_hip_roll" type="hinge" range="-0.4363323129985726 0.43633231299859215" class="sts3215"/>
+          <inertial pos="-3.22586e-09 -0.0125969 -0.0217345" mass="0.110381" fullinertia="4.57868e-05 2.96288e-05 4.45791e-05 6.81317e-12 -9.00209e-13 -3.69846e-07"/>
+          <!-- Part circular_servo_prong_3 -->
+          <geom type="mesh" class="visual" pos="6.93889e-18 0 -0.002" quat="1 0 -5.55112e-17 -2.05758e-17" mesh="circular_servo_prong" material="circular_servo_prong_material"/>
+          <!-- Part lateral_hip_bone -->
+          <geom type="mesh" class="visual" pos="6.93889e-18 -0.02 -0.002" quat="9.36437e-17 0.707107 -0.707107 4.56148e-16" mesh="lateral_hip_bone" material="lateral_hip_bone_material"/>
+          <!-- Part circular_servo_prong_4 -->
+          <geom type="mesh" class="visual" pos="6.93889e-18 -0.04 -0.022" quat="0.5 0.5 -0.5 0.5" mesh="circular_servo_prong" material="circular_servo_prong_material"/>
+          <!-- Link left_thigh_assem -->
+          <body name="left_thigh_assem" pos="0 -0.042 -0.022" quat="0.707107 0.707107 -5.38879e-08 5.38879e-08">
+            <!-- Joint from left_lateral_hip_bone_assem to left_thigh_assem -->
+            <joint axis="0 0 1" name="left_hip_pitch" type="hinge" range="-1.5241807105326188e-07 3.141592501171722" class="sts3215"/>
+            <inertial pos="0.0565982 -3.57567e-11 0.0135897" mass="0.314271" fullinertia="0.000100377 0.000691725 0.00074627 -4.47926e-08 2.07523e-19 3.3258e-20"/>
+            <!-- Part left_thigh -->
+            <geom type="mesh" class="visual" pos="0.0565982 -3.57567e-11 -0.0002" quat="0.707107 1.54556e-16 1.11022e-16 0.707107" mesh="left_thigh" material="left_thigh_material"/>
+            <!-- Part wj_wk00_0124bottomcase_45_4 -->
+            <geom type="mesh" class="visual" pos="0.0876965 -7.15135e-11 0.0083" quat="6.33606e-17 0 -0.707107 0.707107" mesh="wj_wk00_0124bottomcase_45" material="wj_wk00_0124bottomcase_45_material"/>
+            <!-- Part wj_wk00_0122topcabinetcase_95_4 -->
+            <geom type="mesh" class="visual" pos="0.0876965 -7.15135e-11 0.0083" quat="6.33606e-17 0 -0.707107 0.707107" mesh="wj_wk00_0122topcabinetcase_95" material="wj_wk00_0122topcabinetcase_95_material"/>
+            <!-- Part wj_wk00_0123middlecase_56_4 -->
+            <geom type="mesh" class="visual" pos="0.0876965 -7.15135e-11 0.0083" quat="6.33606e-17 0 -0.707107 0.707107" mesh="wj_wk00_0123middlecase_56" material="wj_wk00_0123middlecase_56_material"/>
+            <!-- Part wj_wk00_0124bottomcase_45_5 -->
+            <geom type="mesh" class="visual" pos="0.0255 -3.46945e-18 0.0083" quat="0.707107 -0.707107 -0 -7.12226e-24" mesh="wj_wk00_0124bottomcase_45" material="wj_wk00_0124bottomcase_45_material"/>
+            <!-- Part wj_wk00_0122topcabinetcase_95_5 -->
+            <geom type="mesh" class="visual" pos="0.0255 -3.46945e-18 0.0083" quat="0.707107 -0.707107 -0 -7.12226e-24" mesh="wj_wk00_0122topcabinetcase_95" material="wj_wk00_0122topcabinetcase_95_material"/>
+            <!-- Part wj_wk00_0123middlecase_56_5 -->
+            <geom type="mesh" class="visual" pos="0.0255 -3.46945e-18 0.0083" quat="0.707107 -0.707107 -0 -7.12226e-24" mesh="wj_wk00_0123middlecase_56" material="wj_wk00_0123middlecase_56_material"/>
+            <!-- Link left_calf_assem -->
+            <body name="left_calf_assem" pos="0.113196 -7.15135e-11 -4.16334e-17" quat="9.28799e-17 -4.51028e-17 -3.33067e-16 -1">
+              <!-- Joint from left_thigh_assem to left_calf_assem -->
+              <joint axis="0 0 1" name="left_knee" type="hinge" range="-3.1415923279115385 3.256782545868475e-07" class="sts3215"/>
+              <inertial pos="-0.0526873 1.60599e-06 -0.0151918" mass="0.221129" fullinertia="5.58245e-05 0.00043323 0.000459275 1.87819e-08 -9.55779e-06 -9.66877e-10"/>
+              <!-- Part circular_servo_prong_5 -->
+              <geom type="mesh" class="visual" pos="-5.55112e-17 1.73472e-17 -0.002" quat="0.707107 -1.39796e-15 -1.22125e-15 -0.707107" mesh="circular_servo_prong" material="circular_servo_prong_material"/>
+              <!-- Part left_calf -->
+              <geom type="mesh" class="visual" pos="-0.0985 3.20793e-08 -0.027" quat="1.15145e-07 0.707107 -1.15145e-07 0.707107" mesh="left_calf" material="left_calf_material"/>
+              <!-- Part wj_wk00_0124bottomcase_45_6 -->
+              <geom type="mesh" class="visual" pos="-0.0731483 2.37871e-08 -0.0105" quat="0.707107 0.707107 -1.15145e-07 -1.15145e-07" mesh="wj_wk00_0124bottomcase_45" material="wj_wk00_0124bottomcase_45_material"/>
+              <!-- Part wj_wk00_0122topcabinetcase_95_6 -->
+              <geom type="mesh" class="visual" pos="-0.0731483 2.37871e-08 -0.0105" quat="0.707107 0.707107 -1.15145e-07 -1.15145e-07" mesh="wj_wk00_0122topcabinetcase_95" material="wj_wk00_0122topcabinetcase_95_material"/>
+              <!-- Part wj_wk00_0123middlecase_56_6 -->
+              <geom type="mesh" class="visual" pos="-0.0731483 2.37871e-08 -0.0105" quat="0.707107 0.707107 -1.15145e-07 -1.15145e-07" mesh="wj_wk00_0123middlecase_56" material="wj_wk00_0123middlecase_56_material"/>
+              <!-- Link left_foot_assem -->
+              <body name="left_foot_assem" pos="-0.0986483 3.20919e-08 -0.0022" quat="5.13478e-16 -1 7.6209e-08 -5.21026e-16">
+                <!-- Joint from left_calf_assem to left_foot_assem -->
+                <joint axis="0 0 1" name="left_ankle" type="hinge" range="-1.5707961535347135 1.5707965000550796" class="sts3215"/>
+                <inertial pos="-0.0444214 -0.0216103 0.00782023" mass="0.311255" fullinertia="0.00064142 0.000140276 0.000695821 -2.8997e-05 2.323e-05 3.77705e-06"/>
+                <!-- Part foot_button_connector -->
+                <!-- Part circular_servo_prong_6 -->
+                <geom type="mesh" class="visual" pos="0 0 -0.002" quat="1 0 0 -1.98192e-18" mesh="circular_servo_prong" material="circular_servo_prong_material"/>
+                <!-- Part left_foot_frame -->
+                <geom type="mesh" class="visual" pos="-0.05 1.31839e-16 -0.002" quat="0.5 0.5 0.5 0.5" mesh="left_foot_frame" material="left_foot_frame_material"/>
+                <!-- Part left_foot_cover -->
+                <geom type="mesh" class="visual" pos="-0.05 1.31839e-16 -0.002" quat="0.5 0.5 0.5 0.5" mesh="left_foot_cover" material="left_foot_cover_material"/>
+                <!-- Part foot_pad -->
+                <geom type="mesh" class="visual" pos="-0.0505 -0.025 0.0102" quat="0.5 0.5 0.5 -0.5" mesh="foot_pad" material="foot_pad_material"/>
+                <geom type="mesh" class="collision" pos="-0.0505 -0.025 0.0102" quat="0.5 0.5 0.5 -0.5" mesh="foot_pad" material="foot_pad_material"
+                name="left_foot_bottom_tpu"/>
+                <!-- Frame left_foot -->
+                <site group="3" name="left_foot" pos="-0.068 -0.025 0.0102" quat="0.5 -0.5 0.5 -0.5"/>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <!-- Link bottom_neck -->
+      <body name="bottom_neck" pos="0.0810552 0.019 0.1" quat="0.5 -0.5 -0.5 -0.5">
+        <!-- Joint from trunk_assembly to bottom_neck -->
+        <joint axis="0 0 1" name="neck_pitch" type="hinge" range="-1.0471975511965976 0.0" class="sts3215"/>
+        <inertial pos="0.0600186 0.000222011 -0.0175935" mass="0.274692" fullinertia="6.85265e-05 0.000556822 0.000563358 -5.57605e-07 9.97898e-09 7.16913e-09"/>
+        <!-- Part bottom_neck_joint -->
+        <geom type="mesh" class="visual" pos="0.0600153 0.000268429 -0.0368" quat="0.707107 -1.60677e-16 1.11022e-16 -0.707107" mesh="bottom_neck_joint" material="bottom_neck_joint_material"/>
+        <!-- Part wj_wk00_0124bottomcase_45_7 -->
+        <geom type="mesh" class="visual" pos="0.0255 -1.38778e-17 -0.0083" quat="0.707107 0.707107 -0 -5.7433e-31" mesh="wj_wk00_0124bottomcase_45" material="wj_wk00_0124bottomcase_45_material"/>
+        <!-- Part wj_wk00_0122topcabinetcase_95_7 -->
+        <geom type="mesh" class="visual" pos="0.0255 -1.38778e-17 -0.0083" quat="0.707107 0.707107 -0 -5.7433e-31" mesh="wj_wk00_0122topcabinetcase_95" material="wj_wk00_0122topcabinetcase_95_material"/>
+        <!-- Part wj_wk00_0123middlecase_56_7 -->
+        <geom type="mesh" class="visual" pos="0.0255 -1.38778e-17 -0.0083" quat="0.707107 0.707107 -0 -5.7433e-31" mesh="wj_wk00_0123middlecase_56" material="wj_wk00_0123middlecase_56_material"/>
+        <!-- Part wj_wk00_0124bottomcase_45_8 -->
+        <geom type="mesh" class="visual" pos="0.0945636 0.000268429 -0.0083" quat="2.49524e-16 3.56119e-16 0.707107 0.707107" mesh="wj_wk00_0124bottomcase_45" material="wj_wk00_0124bottomcase_45_material"/>
+        <!-- Part wj_wk00_0122topcabinetcase_95_8 -->
+        <geom type="mesh" class="visual" pos="0.0945636 0.000268429 -0.0083" quat="2.49524e-16 3.56119e-16 0.707107 0.707107" mesh="wj_wk00_0122topcabinetcase_95" material="wj_wk00_0122topcabinetcase_95_material"/>
+        <!-- Part wj_wk00_0123middlecase_56_8 -->
+        <geom type="mesh" class="visual" pos="0.0945636 0.000268429 -0.0083" quat="2.49524e-16 3.56119e-16 0.707107 0.707107" mesh="wj_wk00_0123middlecase_56" material="wj_wk00_0123middlecase_56_material"/>
+        <!-- Link top_neck -->
+        <body name="top_neck" pos="0.120064 0.000268429 9.47159e-16" quat="1.487e-16 0.707107 0.707107 -2.94747e-16">
+          <!-- Joint from bottom_neck to top_neck -->
+          <joint axis="0 0 1" name="head_pitch" type="hinge" range="-0.7853981633974101 0.7853981633974865" class="sts3215"/>
+          <inertial pos="5.08398e-05 0.0347266 0.0188135" mass="0.236852" fullinertia="0.00026105 0.000166809 0.00022941 2.89716e-07 -1.14111e-08 6.06956e-07"/>
+          <!-- Part neck_nod_hinge_bearing_side -->
+          <geom type="mesh" class="visual" pos="0 -2.77556e-17 0.04" quat="1 -1.27759e-16 5.55112e-17 6.48043e-16" mesh="neck_nod_hinge_bearing_side" material="neck_nod_hinge_bearing_side_material"/>
+          <!-- Part neck_nod_hinge_servo_side -->
+          <geom type="mesh" class="visual" pos="1.38778e-17 0 -0.002" quat="1.11514e-16 -3.50414e-16 1 -3.27679e-16" mesh="neck_nod_hinge_servo_side" material="neck_nod_hinge_servo_side_material"/>
+          <!-- Part bearing_side_spacer_2 -->
+          <geom type="mesh" class="visual" pos="1.38778e-17 -5.55112e-17 0.037" quat="1 -1.42749e-16 -2.77556e-16 6.70261e-16" mesh="bearing_side_spacer" material="bearing_side_spacer_material"/>
+          <!-- Part circular_servo_prong_7 -->
+          <geom type="mesh" class="visual" pos="1.38778e-17 0 -0.002" quat="1 0 -1.73472e-18 6.32511e-17" mesh="circular_servo_prong" material="circular_servo_prong_material"/>
+          <!-- Part wj_wk00_0124bottomcase_45_9 -->
+          <geom type="mesh" class="visual" pos="-0.01314 0.0649 0.01886" quat="1.9006e-16 -2.62003e-16 1 -4.91187e-16" mesh="wj_wk00_0124bottomcase_45" material="wj_wk00_0124bottomcase_45_material"/>
+          <!-- Part wj_wk00_0122topcabinetcase_95_9 -->
+          <geom type="mesh" class="visual" pos="-0.01314 0.0649 0.01886" quat="1.9006e-16 -2.62003e-16 1 -4.91187e-16" mesh="wj_wk00_0122topcabinetcase_95" material="wj_wk00_0122topcabinetcase_95_material"/>
+          <!-- Part wj_wk00_0123middlecase_56_9 -->
+          <geom type="mesh" class="visual" pos="-0.01314 0.0649 0.01886" quat="1.9006e-16 -2.62003e-16 1 -4.91187e-16" mesh="wj_wk00_0123middlecase_56" material="wj_wk00_0123middlecase_56_material"/>
+          <!-- Link neck_pan -->
+          <body name="neck_pan" pos="0.01236 0.0732 0.01886" quat="0.707107 0.707107 -5.55112e-16 1.014e-15">
+            <!-- Joint from top_neck to neck_pan -->
+            <joint axis="0 0 1" name="head_yaw" type="hinge" range="-2.792526803190919 2.792526803190935" class="sts3215"/>
+            <inertial pos="0.0192236 -3.53105e-05 0.00686626" mass="0.200308" fullinertia="8.26821e-05 0.00113089 0.00110055 5.26224e-07 -0.000104745 8.5731e-08"/>
+            <!-- Part neck_pan_joint -->
+            <geom type="mesh" class="visual" pos="0 -5.96311e-19 -0.001" quat="2.97579e-29 0.707107 -0.707107 -2.6986e-17" mesh="neck_pan_joint" material="neck_pan_joint_material"/>
+            <!-- Part circular_servo_prong_8 -->
+            <geom type="mesh" class="visual" pos="0 -3.79471e-19 -0.002" quat="1 0 0 0" mesh="circular_servo_prong" material="circular_servo_prong_material"/>
+            <!-- Part wj_wk00_0124bottomcase_45_10 -->
+            <geom type="mesh" class="visual" pos="0.1019 -0.00014 0.03279" quat="0.5 -0.5 -0.5 -0.5" mesh="wj_wk00_0124bottomcase_45" material="wj_wk00_0124bottomcase_45_material"/>
+            <!-- Part wj_wk00_0122topcabinetcase_95_10 -->
+            <geom type="mesh" class="visual" pos="0.1019 -0.00014 0.03279" quat="0.5 -0.5 -0.5 -0.5" mesh="wj_wk00_0122topcabinetcase_95" material="wj_wk00_0122topcabinetcase_95_material"/>
+            <!-- Part wj_wk00_0123middlecase_56_10 -->
+            <geom type="mesh" class="visual" pos="0.1019 -0.00014 0.03279" quat="0.5 -0.5 -0.5 -0.5" mesh="wj_wk00_0123middlecase_56" material="wj_wk00_0123middlecase_56_material"/>
+            <!-- Link head_frame_v2_assm -->
+            <body name="head_frame_v2_assm" pos="0.1102 -0.00014 0.00729" quat="0.5 0.5 -0.5 -0.5">
+              <!-- Joint from neck_pan to head_frame_v2_assm -->
+              <joint axis="0 0 1" name="head_roll" type="hinge" range="-0.5235987755982944 0.5235987755983033" class="sts3215"/>
+              <inertial pos="0.00214224 -0.00571946 0.0951783" mass="1.71919" fullinertia="0.010588 0.0197825 0.011032 3.1474e-05 0.000281752 -5.34079e-05"/>
+              <!-- Part left_antenna_base -->
+              <geom type="mesh" class="visual" pos="0.08927 -1.66533e-16 0.193475" quat="4.38059e-16 -0.707107 4.44089e-16 -0.707107" mesh="left_antenna_base" material="left_antenna_base_material"/>
+              <!-- Part antenna_tip -->
+              <geom type="mesh" class="visual" pos="0.10027 0.005 0.185225" quat="5.14936e-16 -0.707107 0.707107 5.20711e-16" mesh="antenna_tip" material="antenna_tip_material"/>
+              <!-- Part antenna -->
+              <geom type="mesh" class="visual" pos="0.10027 0.005 0.185225" quat="5.17028e-16 -0.707107 0.707107 5.06274e-16" mesh="antenna" material="antenna_material"/>
+              <!-- Part ws2812_light_diffuser -->
+              <geom type="mesh" class="visual" pos="0.05 0 -0.002" quat="1 5.26263e-16 -1.11022e-16 1.29688e-17" mesh="ws2812_light_diffuser" material="ws2812_light_diffuser_material"/>
+              <!-- Part circular_servo_prong_9 -->
+              <geom type="mesh" class="visual" pos="0 0 -0.002" quat="1 0 8.32667e-17 2.32732e-17" mesh="circular_servo_prong" material="circular_servo_prong_material"/>
+              <!-- Part sg90 -->
+              <geom type="mesh" class="visual" pos="0.0583 -1.66533e-16 0.1878" quat="4.38059e-16 -0.707107 3.33067e-16 -0.707107" mesh="sg90" material="sg90_material"/>
+              <!-- Part right_eye -->
+              <geom type="mesh" class="visual" pos="2.0383e-17 -0.03 0.107" quat="1.6686e-17 1.07144e-16 -0.707107 -0.707107" mesh="right_eye" material="right_eye_material"/>
+              <!-- Part one_piece_head_frame -->
+              <geom type="mesh" class="visual" pos="-3.52366e-18 -0.03 0.107" quat="2.45508e-17 -8.13884e-17 -0.707107 -0.707107" mesh="one_piece_head_frame" material="one_piece_head_frame_material"/>
+              <!-- Part bearing -->
+              <geom type="mesh" class="visual" pos="-1.8323e-17 -1.66533e-16 0.208" quat="1 5.50329e-16 -2.22045e-16 2.06642e-17" mesh="bearing" material="bearing_material"/>
+              <!-- Part left_eye -->
+              <geom type="mesh" class="visual" pos="1.34441e-17 -0.03 0.107" quat="1.6686e-17 1.07144e-16 -0.707107 -0.707107" mesh="left_eye" material="left_eye_material"/>
+              <!-- Part tpu_shell -->
+              <geom type="mesh" class="visual" pos="1.70762e-17 0.03 0.107" quat="0.707107 0.707107 2.22045e-16 -2.00108e-16" mesh="tpu_shell" material="tpu_shell_material"/>
+              <!-- Part sg90_2 -->
+              <geom type="mesh" class="visual" pos="-0.0583 -1.66533e-16 0.1878" quat="0.707107 3.89546e-16 -0.707107 -5.08564e-16" mesh="sg90" material="sg90_material"/>
+              <!-- Part antenna_2 -->
+              <geom type="mesh" class="visual" pos="-0.10027 0.005 0.185225" quat="0.707107 2.94206e-16 4.85723e-16 -0.707107" mesh="antenna" material="antenna_material"/>
+              <!-- Part antenna_tip_2 -->
+              <geom type="mesh" class="visual" pos="-0.10027 0.005 0.185225" quat="0.5 0.5 -0.5 -0.5" mesh="antenna_tip" material="antenna_tip_material"/>
+              <!-- Part right_antenna_base -->
+              <geom type="mesh" class="visual" pos="-0.08927 -1.66533e-16 0.193475" quat="3.8654e-16 -0.707107 4.44089e-16 -0.707107" mesh="right_antenna_base" material="right_antenna_base_material"
+              name="right_foot_bottom_tpu"/>
+              <!-- Frame head -->
+              <site group="3" name="head" pos="5.31259e-18 -0.0392089 0.0982741" quat="0.506684 0.493226 0.493226 -0.506684"/>
+            </body>
+          </body>
+        </body>
+      </body>
+      <!-- Link right_hip_rotator_cuff_assem -->
+      <body name="right_hip_rotator_cuff_assem" pos="-0.00897275 -0.0496 -0.0162" quat="0.707107 -2.7046e-15 -5.55112e-16 0.707107">
+        <!-- Joint from trunk_assembly to right_hip_rotator_cuff_assem -->
+        <joint axis="0 0 1" name="right_hip_yaw" type="hinge" range="-1.1344640137963027 0.43633231299859393" class="sts3215"/>
+        <inertial pos="-0.000178783 0.000213536 -0.0216253" mass="0.118127" fullinertia="3.13989e-05 6.11284e-05 5.7286e-05 3.37893e-07 -1.25933e-07 1.38055e-07"/>
+        <!-- Part hip_rotator_cuff -->
+        <geom type="mesh" class="visual" pos="-6.93889e-18 -0.0185 -0.027" quat="3.56821e-15 -0.707107 -2.22045e-16 -0.707107" mesh="hip_rotator_cuff" material="hip_rotator_cuff_material"/>
+        <!-- Part circular_servo_prong_10 -->
+        <geom type="mesh" class="visual" pos="-6.93889e-18 0 -0.002" quat="0.707107 5.97945e-16 2.60902e-15 -0.707107" mesh="circular_servo_prong" material="circular_servo_prong_material"/>
+        <!-- Part wj_wk00_0124bottomcase_45_11 -->
+        <geom type="mesh" class="visual" pos="0.01265 -0.0088 -0.027" quat="2.28453e-15 -1 -2.77556e-15 1.50666e-15" mesh="wj_wk00_0124bottomcase_45" material="wj_wk00_0124bottomcase_45_material"/>
+        <!-- Part wj_wk00_0122topcabinetcase_95_11 -->
+        <geom type="mesh" class="visual" pos="0.01265 -0.0088 -0.027" quat="2.28453e-15 -1 -2.77556e-15 1.50666e-15" mesh="wj_wk00_0122topcabinetcase_95" material="wj_wk00_0122topcabinetcase_95_material"/>
+        <!-- Part wj_wk00_0123middlecase_56_11 -->
+        <geom type="mesh" class="visual" pos="0.01265 -0.0088 -0.027" quat="2.28453e-15 -1 -2.77556e-15 1.50666e-15" mesh="wj_wk00_0123middlecase_56" material="wj_wk00_0123middlecase_56_material"/>
+        <!-- Link right_lateral_hip_bone_assem -->
+        <body name="right_lateral_hip_bone_assem" pos="-0.01285 -0.0171 -0.027" quat="0.707107 -0.707107 -9.99201e-16 3.07251e-15">
+          <!-- Joint from right_hip_rotator_cuff_assem to right_lateral_hip_bone_assem -->
+          <joint axis="0 0 1" name="right_hip_roll" type="hinge" range="-0.43633231299857617 0.4363323129985886" class="sts3215"/>
+          <inertial pos="-0.0125969 3.22586e-09 -0.0217345" mass="0.110381" fullinertia="2.96288e-05 4.57868e-05 4.45791e-05 -6.81317e-12 -3.69846e-07 9.00209e-13"/>
+          <!-- Part circular_servo_prong_11 -->
+          <geom type="mesh" class="visual" pos="-1.38778e-17 0 -0.002" quat="0.707107 8.63902e-19 -1.11022e-16 -0.707107" mesh="circular_servo_prong" material="circular_servo_prong_material"/>
+          <!-- Part lateral_hip_bone_2 -->
+          <geom type="mesh" class="visual" pos="-0.02 1.17961e-16 -0.002" quat="9.67111e-17 -3.12424e-15 -1 4.3642e-17" mesh="lateral_hip_bone" material="lateral_hip_bone_material"/>
+          <!-- Part circular_servo_prong_12 -->
+          <geom type="mesh" class="visual" pos="-0.04 2.35922e-16 -0.022" quat="0.707107 -1.8321e-15 -0.707107 -1.56413e-15" mesh="circular_servo_prong" material="circular_servo_prong_material"/>
+          <!-- Link right_thigh_assem -->
+          <body name="right_thigh_assem" pos="-0.042 2.498e-16 -0.022" quat="1.88438e-15 0.707107 -1.33227e-15 0.707107">
+            <!-- Joint from right_lateral_hip_bone_assem to right_thigh_assem -->
+            <joint axis="0 0 1" name="right_hip_pitch" type="hinge" range="-4.275646503515418e-10 3.1415926531622285" class="sts3215"/>
+            <inertial pos="5.99559e-11 -0.0565982 -0.0135897" mass="0.314271" fullinertia="0.000691725 0.000100377 0.00074627 -4.47924e-08 -3.91539e-19 3.36696e-19"/>
+            <!-- Part left_thigh_2 -->
+            <geom type="mesh" class="visual" pos="5.99559e-11 -0.0565982 0.0002" quat="8.00202e-16 1 2.13782e-10 -2.01375e-16" mesh="left_thigh" material="left_thigh_material"/>
+            <!-- Part wj_wk00_0124bottomcase_45_12 -->
+            <geom type="mesh" class="visual" pos="1.09027e-11 -0.0255 -0.0083" quat="0.5 0.5 -0.5 -0.5" mesh="wj_wk00_0124bottomcase_45" material="wj_wk00_0124bottomcase_45_material"/>
+            <!-- Part wj_wk00_0122topcabinetcase_95_12 -->
+            <geom type="mesh" class="visual" pos="1.09027e-11 -0.0255 -0.0083" quat="0.5 0.5 -0.5 -0.5" mesh="wj_wk00_0122topcabinetcase_95" material="wj_wk00_0122topcabinetcase_95_material"/>
+            <!-- Part wj_wk00_0123middlecase_56_12 -->
+            <geom type="mesh" class="visual" pos="1.09027e-11 -0.0255 -0.0083" quat="0.5 0.5 -0.5 -0.5" mesh="wj_wk00_0123middlecase_56" material="wj_wk00_0123middlecase_56_material"/>
+            <!-- Part wj_wk00_0124bottomcase_45_13 -->
+            <geom type="mesh" class="visual" pos="1.09009e-10 -0.0876965 -0.0083" quat="0.5 0.5 0.5 0.5" mesh="wj_wk00_0124bottomcase_45" material="wj_wk00_0124bottomcase_45_material"/>
+            <!-- Part wj_wk00_0122topcabinetcase_95_13 -->
+            <geom type="mesh" class="visual" pos="1.09009e-10 -0.0876965 -0.0083" quat="0.5 0.5 0.5 0.5" mesh="wj_wk00_0122topcabinetcase_95" material="wj_wk00_0122topcabinetcase_95_material"/>
+            <!-- Part wj_wk00_0123middlecase_56_13 -->
+            <geom type="mesh" class="visual" pos="1.09009e-10 -0.0876965 -0.0083" quat="0.5 0.5 0.5 0.5" mesh="wj_wk00_0123middlecase_56" material="wj_wk00_0123middlecase_56_material"/>
+            <!-- Link right_calft_assem -->
+            <body name="right_calft_assem" pos="1.19912e-10 -0.113196 3.46945e-16" quat="1.35404e-16 2.13783e-10 -1 7.43072e-16">
+              <!-- Joint from right_thigh_assem to right_calft_assem -->
+              <joint axis="0 0 1" name="right_knee" type="hinge" range="0.0 3.141592653589793" class="sts3215"/>
+              <inertial pos="-1.58883e-06 -0.0526873 -0.0151918" mass="0.221129" fullinertia="0.00043323 5.58245e-05 0.000459275 -1.8659e-08 9.6999e-10 -9.55779e-06"/>
+              <!-- Part circular_servo_prong_13 -->
+              <geom type="mesh" class="visual" pos="0 0 -0.002" quat="1 -0 1.55204e-16 4.14788e-16" mesh="circular_servo_prong" material="circular_servo_prong_material"/>
+              <!-- Part left_calf_2 -->
+              <geom type="mesh" class="visual" pos="5.89806e-17 -0.0985 -0.027" quat="0.5 -0.5 -0.5 -0.5" mesh="left_calf" material="left_calf_material"/>
+              <!-- Part wj_wk00_0124bottomcase_45_14 -->
+              <geom type="mesh" class="visual" pos="3.57568e-11 -0.0731483 -0.0105" quat="0.5 0.5 0.5 0.5" mesh="wj_wk00_0124bottomcase_45" material="wj_wk00_0124bottomcase_45_material"/>
+              <!-- Part wj_wk00_0122topcabinetcase_95_14 -->
+              <geom type="mesh" class="visual" pos="3.57568e-11 -0.0731483 -0.0105" quat="0.5 0.5 0.5 0.5" mesh="wj_wk00_0122topcabinetcase_95" material="wj_wk00_0122topcabinetcase_95_material"/>
+              <!-- Part wj_wk00_0123middlecase_56_14 -->
+              <geom type="mesh" class="visual" pos="3.57568e-11 -0.0731483 -0.0105" quat="0.5 0.5 0.5 0.5" mesh="wj_wk00_0123middlecase_56" material="wj_wk00_0123middlecase_56_material"/>
+              <!-- Link right_foot_assem -->
+              <body name="right_foot_assem" pos="3.57568e-11 -0.0986483 -0.0022" quat="2.20883e-17 0.707107 0.707107 -6.05354e-17">
+                <!-- Joint from right_calft_assem to right_foot_assem -->
+                <joint axis="0 0 1" name="right_ankle" type="hinge" range="-1.570796326367332 1.5707963272224612" class="sts3215"/>
+                <inertial pos="-0.0444214 0.0216102 0.00981301" mass="0.311255" fullinertia="0.00064146 0.000140317 0.00069582 2.89972e-05 2.333e-05 -3.82611e-06"/>
+                <!-- Part right_foot_cover -->
+                <geom type="mesh" class="visual" pos="-0.05 8.32667e-17 0.0646" quat="0.5 -0.5 0.5 -0.5" mesh="right_foot_cover" material="right_foot_cover_material"/>
+                <!-- Part circular_servo_prong_14 -->
+                <geom type="mesh" class="visual" pos="0 0 -0.002" quat="1 0 -3.33067e-16 5.34653e-17" mesh="circular_servo_prong" material="circular_servo_prong_material"/>
+                <!-- Part right_foot_frame -->
+                <geom type="mesh" class="visual" pos="-0.05 8.32667e-17 0.0646" quat="0.5 -0.5 0.5 -0.5" mesh="right_foot_frame" material="right_foot_frame_material"/>
+                <!-- Part foot_pad_2 -->
+                <geom type="mesh" class="visual" pos="-0.0505 0.025 0.0122" quat="0.5 -0.5 -0.5 -0.5" mesh="foot_pad" material="foot_pad_material"/>
+                <geom type="mesh" class="collision" pos="-0.0505 0.025 0.0122" quat="0.5 -0.5 -0.5 -0.5" mesh="foot_pad" material="foot_pad_material"/>
+                <!-- Part foot_button_connector_2 -->
+                <!-- Frame right_foot -->
+                <site group="3" name="right_foot" pos="-0.068 0.025 0.0122" quat="0.5 0.5 0.5 0.5"/>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="battery_rack.stl"/>
+    <mesh file="left_calf.stl"/>
+    <mesh file="wj_wk00_0122topcabinetcase_95.stl"/>
+    <mesh file="right_frame.stl"/>
+    <mesh file="wj_wk00_0124bottomcase_45.stl"/>
+    <mesh file="lateral_hip_bone.stl"/>
+    <mesh file="bearing.stl"/>
+    <mesh file="right_eye.stl"/>
+    <mesh file="servo_side.stl"/>
+    <mesh file="wj_wk00_0123middlecase_56.stl"/>
+    <mesh file="one_piece_head_frame.stl"/>
+    <mesh file="neck_nod_hinge_servo_side.stl"/>
+    <mesh file="right_hip_rotator_cuff.stl"/>
+    <mesh file="bottom_neck_joint.stl"/>
+    <mesh file="neck_pan_joint.stl"/>
+    <mesh file="left_antenna_base.stl"/>
+    <mesh file="bearing_side.stl"/>
+    <mesh file="antenna_tip.stl"/>
+    <mesh file="torso_frame_v2.stl"/>
+    <mesh file="right_foot_cover.stl"/>
+    <mesh file="zeee_lipo.stl"/>
+    <mesh file="bearing_side_spacer.stl"/>
+    <mesh file="left_foot_cover.stl"/>
+    <mesh file="foot_pad.stl"/>
+    <mesh file="neck_nod_hinge_bearing_side.stl"/>
+    <mesh file="tpu_shell.stl"/>
+    <mesh file="right_foot_frame.stl"/>
+    <mesh file="antenna.stl"/>
+    <mesh file="circular_servo_prong.stl"/>
+    <mesh file="front_top_frame.stl"/>
+    <mesh file="left_thigh.stl"/>
+    <mesh file="ws2812_light_diffuser.stl"/>
+    <mesh file="back_right_frame.stl"/>
+    <mesh file="inner_front_frame.stl"/>
+    <mesh file="front_frame.stl"/>
+    <mesh file="sg90.stl"/>
+    <mesh file="left_eye.stl"/>
+    <mesh file="back_left_frame.stl"/>
+    <mesh file="hip_rotator_cuff.stl"/>
+    <mesh file="left_foot_frame.stl"/>
+    <mesh file="right_antenna_base.stl"/>
+    <mesh file="back_top_frame.stl"/>
+    <mesh file="inner_back_frame.stl"/>
+    <mesh file="left_frame.stl"/>
+    <material name="zeee_lipo_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="torso_frame_v2_material" rgba="0.647059 0.647059 0.647059 1"/>
+    <material name="back_right_frame_material" rgba="0.917647 0.917647 0.917647 1"/>
+    <material name="back_left_frame_material" rgba="0.917647 0.917647 0.917647 1"/>
+    <material name="battery_rack_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="back_top_frame_material" rgba="0.980392 0.713725 0.00392157 1"/>
+    <material name="right_frame_material" rgba="0.498039 0.498039 0.498039 1"/>
+    <material name="inner_front_frame_material" rgba="0.647059 0.647059 0.647059 1"/>
+    <material name="front_frame_material" rgba="0.498039 0.498039 0.498039 1"/>
+    <material name="servo_side_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="circular_servo_prong_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="bearing_side_spacer_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="bearing_side_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="inner_back_frame_material" rgba="0.231373 0.380392 0.705882 1"/>
+    <material name="front_top_frame_material" rgba="0.980392 0.713725 0.00392157 1"/>
+    <material name="left_frame_material" rgba="0.498039 0.498039 0.498039 1"/>
+    <material name="wj_wk00_0124bottomcase_45_material" rgba="0.247059 0.243137 0.243137 1"/>
+    <material name="wj_wk00_0122topcabinetcase_95_material" rgba="0.247059 0.243137 0.243137 1"/>
+    <material name="wj_wk00_0123middlecase_56_material" rgba="0.247059 0.243137 0.243137 1"/>
+    <material name="right_hip_rotator_cuff_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="lateral_hip_bone_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="left_thigh_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="left_calf_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="left_foot_frame_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="left_foot_cover_material" rgba="0.231373 0.380392 0.705882 1"/>
+    <material name="foot_pad_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="bottom_neck_joint_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="neck_nod_hinge_bearing_side_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="neck_nod_hinge_servo_side_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="neck_pan_joint_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="left_antenna_base_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="antenna_tip_material" rgba="0.647059 0.647059 0.647059 1"/>
+    <material name="antenna_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="ws2812_light_diffuser_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="sg90_material" rgba="0.435294 0.670588 0.976471 1"/>
+    <material name="right_eye_material" rgba="0.231373 0.380392 0.705882 1"/>
+    <material name="one_piece_head_frame_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="bearing_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="left_eye_material" rgba="0.917647 0.917647 0.917647 1"/>
+    <material name="tpu_shell_material" rgba="0.647059 0.647059 0.647059 1"/>
+    <material name="right_antenna_base_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="hip_rotator_cuff_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="right_foot_cover_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="right_foot_frame_material" rgba="0.615686 0.811765 0.929412 1"/>
+  </asset>
+  <actuator>
+    <position class="sts3215" name="left_hip_yaw" joint="left_hip_yaw" inheritrange="1"/>
+    <position class="sts3215" name="left_hip_roll" joint="left_hip_roll" inheritrange="1"/>
+    <position class="sts3215" name="left_hip_pitch" joint="left_hip_pitch" inheritrange="1"/>
+    <position class="sts3215" name="left_knee" joint="left_knee" inheritrange="1"/>
+    <position class="sts3215" name="left_ankle" joint="left_ankle" inheritrange="1"/>
+    <position class="sts3215" name="neck_pitch" joint="neck_pitch" inheritrange="1"/>
+    <position class="sts3215" name="head_pitch" joint="head_pitch" inheritrange="1"/>
+    <position class="sts3215" name="head_yaw" joint="head_yaw" inheritrange="1"/>
+    <position class="sts3215" name="head_roll" joint="head_roll" inheritrange="1"/>
+    <position class="sts3215" name="right_hip_yaw" joint="right_hip_yaw" inheritrange="1"/>
+    <position class="sts3215" name="right_hip_roll" joint="right_hip_roll" inheritrange="1"/>
+    <position class="sts3215" name="right_hip_pitch" joint="right_hip_pitch" inheritrange="1"/>
+    <position class="sts3215" name="right_knee" joint="right_knee" inheritrange="1"/>
+    <position class="sts3215" name="right_ankle" joint="right_ankle" inheritrange="1"/>
+  </actuator>
+  <equality/>
+</mujoco>
